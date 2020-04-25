@@ -1,7 +1,8 @@
-<?php
-session_start();
-include('connection.php');
-?>
+<?php  
+ session_start();  
+ include 'connection.php';  
+ $username = $_SESSION['email'];   
+ ?>
 <html>
     <head>
         <style>
@@ -148,9 +149,6 @@ transition: 0.9s;
                 
                     <a href="logout.php" ><u>LogOut</u></a>
                      </li>
-                    
-                   
-                    
             </ul>
                 
             </nav></div>
@@ -162,6 +160,20 @@ transition: 0.9s;
   <br>
   <select id="mySelect" name="email">
   <?php
+  if(isset($_SESSION['email'])){  
+    if(time()-$_SESSION['last_login']>15)  
+    {  
+      header('location:profile.php');  
+    }  
+    else  
+    {  
+      $_SESSION['last_login'] = time();  
+    }  
+  }  
+  else  
+  {  
+    header('location:login.php');  
+  }  
   $query="SELECT * FROM `user` ";
   $data=mysqli_query($conn,$query);
   while($array=mysqli_fetch_array($data))
