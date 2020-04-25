@@ -16,7 +16,8 @@ if(isset($_POST['submit'])){
 
     if($num==1){
 
-        // $_SESSION['email'] = $name;
+        $_SESSION['email'] = $email;
+       $_SESSION['last_login'] = time();
         ?>
         <Script>
                 alert('login successful');
